@@ -1,8 +1,8 @@
 package io.gitlab.edrd.logimanager
 
 import io.gitlab.edrd.logimanager.internal.Configuration
+import io.gitlab.edrd.logimanager.internal.EventListener
 import io.gitlab.edrd.logimanager.internal.Logger
-import io.gitlab.edrd.logimanager.internal.Xcb
 import kotlinx.coroutines.runBlocking
 import platform.posix.system
 
@@ -13,11 +13,12 @@ fun main(args: Array<String>) = runBlocking {
 
 	val configuration = Configuration.loadFromFile(args.first())
 
-	val xcb = Xcb(logger)
+	val eventListener = EventListener()
 
-	setOf<Byte>(8, 9).forEach { xcb.grabButton(it) }
+	// TODO: grab buttons defined in config
+	setOf<Byte>(8, 9).forEach { eventListener.grabButton(it) }
 
-	val events = xcb.events
+	val events = eventListener.events
 
 	logger.info("Listening for events")
 
@@ -26,8 +27,8 @@ fun main(args: Array<String>) = runBlocking {
 	}
 }
 
-private fun handleEvent(event: Xcb.Event, configuration: Configuration) = when (event) {
-	is Xcb.Event.ButtonPress -> {
+private fun handleEvent(event: EventListener.Event, configuration: Configuration) = when (event) {
+	is EventListener.Event.ButtonPress -> {
 		logger.debug("Received mouse button ${event.buttonNumber} press")
 
 		when (event.buttonNumber) {

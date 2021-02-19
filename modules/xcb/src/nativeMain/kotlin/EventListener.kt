@@ -26,7 +26,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
 
-class Xcb(private val logger: Logger) {
+class EventListener(/*private val logger: Logger*/) {
 	private val eventChannel = Channel<Event>(capacity = 128)
 
 	sealed class Event {
@@ -51,7 +51,7 @@ class Xcb(private val logger: Logger) {
 	}
 
 	private suspend fun handleButtonPressEvent(event: CPointer<xcb_generic_event_t>) {
-		logger.debug("Button press event received")
+//		logger.debug("Button press event received")
 
 		val buttonPressEvent = event.pointed.reinterpret<xcb_button_press_event_t>()
 		val buttonNumber = buttonPressEvent.detail.convert<Int>()
