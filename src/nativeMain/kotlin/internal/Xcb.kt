@@ -1,5 +1,20 @@
 package io.gitlab.edrd.logimanager.internal
 
+import cinterop.xcb.XCB_BUTTON_PRESS
+import cinterop.xcb.XCB_NONE
+import cinterop.xcb.xcb_button_press_event_t
+import cinterop.xcb.xcb_connect
+import cinterop.xcb.xcb_event_mask_t
+import cinterop.xcb.xcb_flush
+import cinterop.xcb.xcb_generic_event_t
+import cinterop.xcb.xcb_get_setup
+import cinterop.xcb.xcb_grab_button
+import cinterop.xcb.xcb_grab_mode_t
+import cinterop.xcb.xcb_mod_mask_t
+import cinterop.xcb.xcb_poll_for_event
+import cinterop.xcb.xcb_screen_iterator_t
+import cinterop.xcb.xcb_screen_next
+import cinterop.xcb.xcb_setup_roots_iterator
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.convert
 import kotlinx.cinterop.nativeHeap.free
@@ -10,21 +25,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.yield
-import xcb.XCB_BUTTON_PRESS
-import xcb.XCB_NONE
-import xcb.xcb_button_press_event_t
-import xcb.xcb_connect
-import xcb.xcb_event_mask_t
-import xcb.xcb_flush
-import xcb.xcb_generic_event_t
-import xcb.xcb_get_setup
-import xcb.xcb_grab_button
-import xcb.xcb_grab_mode_t
-import xcb.xcb_mod_mask_t
-import xcb.xcb_poll_for_event
-import xcb.xcb_screen_iterator_t
-import xcb.xcb_screen_next
-import xcb.xcb_setup_roots_iterator
 
 class Xcb(private val logger: Logger) {
 	private val eventChannel = Channel<Event>(capacity = 128)
