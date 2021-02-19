@@ -1,6 +1,6 @@
 headers = xcb/xcb.h
 headerFilter = xcb/**
-package = cinterop.xcb
+package = internal.cinterop.xcb
 strictEnums = xcb_event_mask_t xcb_grab_mode_t xcb_mod_mask_t
 linkerOpts = -L/usr/lib -lxcb
 libraryPaths = /usr/lib
