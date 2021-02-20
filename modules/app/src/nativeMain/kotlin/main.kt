@@ -1,8 +1,9 @@
 package io.gitlab.edrd.logimanager
 
+import com.soywiz.korio.lang.Environment
 import io.gitlab.edrd.logimanager.internal.Configuration
-import io.gitlab.edrd.logimanager.internal.EventListener
 import io.gitlab.edrd.logimanager.internal.Logger
+import io.gitlab.edrd.logimanager.xcb.Xcb
 import kotlinx.coroutines.runBlocking
 import platform.posix.system
 
@@ -13,23 +14,23 @@ fun main(args: Array<String>) = runBlocking {
 
 	val configuration = Configuration.loadFromFile(args.first())
 
-	val eventListener = EventListener()
+	val xcb = Xcb()
 
 	// TODO: grab buttons defined in config
-	setOf<Byte>(8, 9).forEach { eventListener.grabButton(it) }
+	setOf(8, 9).forEach { xcb.grabButton(it) }
 
-	val events = eventListener.events
+	val events = xcb.events
 
-	logger.info("Listening for events")
+	logger.info { "Listening for events" }
 
 	while (true) {
 		handleEvent(events.receive(), configuration)
 	}
 }
 
-private fun handleEvent(event: EventListener.Event, configuration: Configuration) = when (event) {
-	is EventListener.Event.ButtonPress -> {
-		logger.debug("Received mouse button ${event.buttonNumber} press")
+private fun handleEvent(event: Xcb.Event, configuration: Configuration) = when (event) {
+	is Xcb.Event.ButtonPress -> {
+		logger.debug { "Received mouse button ${event.buttonNumber} press" }
 
 		when (event.buttonNumber) {
 			8 -> system(configuration.button8Action)
@@ -39,4 +40,6 @@ private fun handleEvent(event: EventListener.Event, configuration: Configuration
 	}
 }
 
-private val logger = Logger(Logger.Level.Info)
+private val logger = Logger(
+	level = Environment["LogLevel"]?.let { Logger.Level.forValue(it) } ?: Logger.Level.Info
+)
