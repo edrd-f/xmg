@@ -9,10 +9,10 @@ import kotlinx.cinterop.nativeHeap
 import kotlinx.cinterop.pointed
 import kotlinx.cinterop.reinterpret
 
-internal fun CPointer<xcb_generic_event_t>.toPublicEvent(): Xcb.Event {
-	return when (val responseType = this.pointed.response_type.convert<Int>()) {
+internal fun CPointer<xcb_generic_event_t>.toPublicEvent(): Xcb.Event? {
+	return when (this.pointed.response_type.convert<Int>()) {
 		ResponseType.ButtonPress -> convertButtonPressEvent(this)
-		else -> error("Unsupported event type: $responseType")
+		else -> null
 	}
 }
 
