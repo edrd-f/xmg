@@ -2,6 +2,7 @@ package io.gitlab.edrd.xmousegrabber.internal
 
 import com.soywiz.korio.file.std.LocalVfs
 import com.soywiz.korio.util.loadProperties
+import io.gitlab.edrd.xmousegrabber.exception.BadInputException
 
 data class Configuration(val buttons: List<Button>) {
 	data class Button(val number: Int, val command: String)
@@ -12,7 +13,7 @@ data class Configuration(val buttons: List<Button>) {
 
 			val buttons = properties.map { (key, value) ->
 				val (buttonNumber) = configPattern.find(key)?.destructured
-					?: invalidConfigError("Invalid configuration key: $key")
+					?: invalidConfigError(key)
 
 				Button(number = buttonNumber.toInt(), command = value)
 			}
@@ -22,8 +23,8 @@ data class Configuration(val buttons: List<Button>) {
 
 		private val configPattern = Regex("^\\s*button\\.(\\d+)\\.command")
 
-		private fun invalidConfigError(message: String): Nothing {
-			throw IllegalArgumentException(message)
+		private fun invalidConfigError(key: String): Nothing {
+			throw BadInputException("Invalid configuration key: $key")
 		}
 	}
 }
