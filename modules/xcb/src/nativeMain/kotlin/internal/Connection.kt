@@ -1,9 +1,9 @@
-package io.gitlab.edrd.logimanager.xcb.internal
+package io.gitlab.edrd.xmousegrabber.xcb.internal
 
 import internal.cinterop.xcb.xcb_connect
 import internal.cinterop.xcb.xcb_flush
 import internal.cinterop.xcb.xcb_poll_for_event
-import io.gitlab.edrd.logimanager.xcb.Xcb
+import io.gitlab.edrd.xmousegrabber.xcb.Xcb
 
 internal class Connection {
 	val reference = xcb_connect(null, null)

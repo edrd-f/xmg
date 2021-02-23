@@ -1,4 +1,4 @@
-package io.gitlab.edrd.logimanager.internal
+package io.gitlab.edrd.xmousegrabber.internal
 
 import com.soywiz.korio.file.std.LocalVfs
 import com.soywiz.korio.util.loadProperties

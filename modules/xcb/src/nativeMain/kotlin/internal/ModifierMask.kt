@@ -1,4 +1,4 @@
-package io.gitlab.edrd.logimanager.xcb.internal
+package io.gitlab.edrd.xmousegrabber.xcb.internal
 
 import internal.cinterop.xcb.uint16_t
 import internal.cinterop.xcb.xcb_mod_mask_t.XCB_MOD_MASK_ANY

@@ -6,7 +6,7 @@ repositories {
 
 kotlin {
 	nativeTarget.binaries.executable {
-		entryPoint = "io.gitlab.edrd.logimanager.main"
+		entryPoint = "io.gitlab.edrd.xmousegrabber.main"
 	}
 
 	sourceSets.getByName("commonMain") {

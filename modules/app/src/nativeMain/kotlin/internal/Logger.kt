@@ -1,4 +1,4 @@
-package io.gitlab.edrd.logimanager.internal
+package io.gitlab.edrd.xmousegrabber.internal
 
 class Logger(@PublishedApi internal val level: Level) {
 	enum class Level {

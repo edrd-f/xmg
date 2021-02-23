@@ -1,4 +1,4 @@
-package io.gitlab.edrd.logimanager.xcb.internal
+package io.gitlab.edrd.xmousegrabber.xcb.internal
 
 import internal.cinterop.xcb.xcb_get_setup
 import internal.cinterop.xcb.xcb_screen_next

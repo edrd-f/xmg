@@ -1,4 +1,4 @@
-package io.gitlab.edrd.logimanager.xcb.internal
+package io.gitlab.edrd.xmousegrabber.xcb.internal
 
 import internal.cinterop.xcb.uint8_t
 import internal.cinterop.xcb.xcb_grab_mode_t.XCB_GRAB_MODE_ASYNC

@@ -1,9 +1,9 @@
-package io.gitlab.edrd.logimanager
+package io.gitlab.edrd.xmousegrabber
 
 import com.soywiz.korio.lang.Environment
-import io.gitlab.edrd.logimanager.internal.Configuration
-import io.gitlab.edrd.logimanager.internal.Logger
-import io.gitlab.edrd.logimanager.xcb.Xcb
+import io.gitlab.edrd.xmousegrabber.internal.Configuration
+import io.gitlab.edrd.xmousegrabber.internal.Logger
+import io.gitlab.edrd.xmousegrabber.xcb.Xcb
 import kotlinx.coroutines.runBlocking
 import platform.posix.system
 

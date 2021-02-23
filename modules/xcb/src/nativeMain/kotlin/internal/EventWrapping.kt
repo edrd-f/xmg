@@ -1,8 +1,8 @@
-package io.gitlab.edrd.logimanager.xcb.internal
+package io.gitlab.edrd.xmousegrabber.xcb.internal
 
 import internal.cinterop.xcb.xcb_button_press_event_t
 import internal.cinterop.xcb.xcb_generic_event_t
-import io.gitlab.edrd.logimanager.xcb.Xcb
+import io.gitlab.edrd.xmousegrabber.xcb.Xcb
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.convert
 import kotlinx.cinterop.nativeHeap

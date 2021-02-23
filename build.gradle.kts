@@ -21,7 +21,7 @@ tasks.create("release") {
 
 	doLast {
 		val appOutputDir = "${project(":app").buildDir}/bin/native/releaseExecutable"
-		val binaryOutputFile = file("${project.buildDir}/logi-manager")
+		val binaryOutputFile = file("${rootProject.buildDir}/${rootProject.name}")
 		file("$appOutputDir/app.kexe").copyTo(binaryOutputFile, overwrite = true)
 		binaryOutputFile.setExecutable(true)
 	}

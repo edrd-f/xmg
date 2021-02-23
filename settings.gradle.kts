@@ -1,4 +1,4 @@
-rootProject.name = "logi-manager"
+rootProject.name = "x-mouse-grabber"
 
 val modulesDir = file("modules")
 

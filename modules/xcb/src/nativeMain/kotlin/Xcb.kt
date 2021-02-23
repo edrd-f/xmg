@@ -1,6 +1,6 @@
-package io.gitlab.edrd.logimanager.xcb
+package io.gitlab.edrd.xmousegrabber.xcb
 
-import io.gitlab.edrd.logimanager.xcb.internal.Connection
+import io.gitlab.edrd.xmousegrabber.xcb.internal.Connection
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
