@@ -6,10 +6,6 @@ import com.soywiz.korio.util.loadProperties
 data class Configuration(val buttons: List<Button>) {
 	data class Button(val number: Int, val command: String)
 
-	private val buttonMap = buttons.associateBy { it.number }
-
-	fun button(number: Int): Button? = buttonMap[number]
-
 	companion object {
 		suspend fun loadFromFile(path: String): Configuration {
 			val properties = LocalVfs[path].loadProperties()
