@@ -5,8 +5,16 @@ repositories {
 }
 
 kotlin {
-	nativeTarget.binaries.executable {
-		entryPoint = "io.gitlab.edrd.xmousegrabber.main"
+	nativeTarget.apply {
+		binaries.executable {
+			entryPoint = "io.gitlab.edrd.xmousegrabber.main"
+		}
+		compilations["main"].cinterops {
+			create("glibc") {
+				defFile("src/nativeMain/cinterop/glibc.def")
+				includeDirs("/usr/include")
+			}
+		}
 	}
 
 	sourceSets.getByName("commonMain") {

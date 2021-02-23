@@ -16,12 +16,14 @@ allprojects {
 	kotlin { nativeTarget }
 }
 
+val binaryApplicationName = "xmg"
+
 tasks.create("release") {
 	dependsOn(tasks.getByPath(":app:linkReleaseExecutableNative"))
 
 	doLast {
 		val appOutputDir = "${project(":app").buildDir}/bin/native/releaseExecutable"
-		val binaryOutputFile = file("${rootProject.buildDir}/${rootProject.name}")
+		val binaryOutputFile = file("${rootProject.buildDir}/$binaryApplicationName")
 		file("$appOutputDir/app.kexe").copyTo(binaryOutputFile, overwrite = true)
 		binaryOutputFile.setExecutable(true)
 	}

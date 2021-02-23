@@ -1,8 +1,15 @@
 package io.gitlab.edrd.xmousegrabber
 
+import io.gitlab.edrd.xmousegrabber.internal.filePathForArgument
+import kotlin.system.exitProcess
+
 fun main(args: Array<String>) {
 	if (args.isEmpty()) {
-		println("Usage: x-mouse-grabber /absolute/path/to/config.properties")
+		println("Usage: xmg config.properties")
+		exitProcess(status = 1)
 	}
-	Application(configFilePath = args.first()).run()
+
+	val configFilePath = filePathForArgument(args.first())
+
+	Application(configFilePath).run()
 }

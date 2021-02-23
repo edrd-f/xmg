@@ -1,0 +1,4 @@
+headers = unistd.h
+package = internal.cinterop.glibc
+compilerOpts = -D_GNU_SOURCE
+linkerOpts = -lc
