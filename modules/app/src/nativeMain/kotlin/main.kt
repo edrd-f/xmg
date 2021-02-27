@@ -1,21 +1,20 @@
 package io.gitlab.edrd.xmousegrabber
 
-import io.gitlab.edrd.xmousegrabber.internal.fileExists
-import io.gitlab.edrd.xmousegrabber.internal.filePathForArgument
+import io.gitlab.edrd.xmousegrabber.io.File
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
 	if (args.isEmpty()) {
-		fail("Usage: xmg config.properties")
+		fail("Usage: xmg <config-file-path>")
 	}
 
-	val configFilePath = filePathForArgument(args.first())
+	val configFile = File.forRelativeOrAbsolutePath(args.first())
 
-	if (!fileExists(configFilePath)) {
-		fail("File $configFilePath does not exist")
+	if (!configFile.exists()) {
+		fail("File ${configFile.path} does not exist")
 	}
 
-	Application(configFilePath).run()
+	Application(configFile).run()
 }
 
 private fun fail(message: String) {
