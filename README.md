@@ -38,7 +38,10 @@ For example:
 button.8.command = echo Hello
 
 # Spotify Play/Pause through D-Bus
-button.9.command = dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+button.9.command = dbus-send --type=method_call \
+  --dest=org.mpris.MediaPlayer2.spotify \
+	/org/mpris/MediaPlayer2 \
+	org.mpris.MediaPlayer2.Player.PlayPause
 ```
 
 \* _Only a subset of the properties format is supported._
