@@ -1,8 +1,8 @@
 package io.gitlab.edrd.xmousegrabber
 
-import com.soywiz.korio.lang.Environment
 import io.gitlab.edrd.xmousegrabber.internal.Configuration
 import io.gitlab.edrd.xmousegrabber.internal.Logger
+import io.gitlab.edrd.xmousegrabber.io.Environment
 import io.gitlab.edrd.xmousegrabber.io.File
 import io.gitlab.edrd.xmousegrabber.xcb.Xcb
 import kotlinx.coroutines.runBlocking

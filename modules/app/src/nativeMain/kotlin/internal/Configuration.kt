@@ -1,15 +1,15 @@
 package io.gitlab.edrd.xmousegrabber.internal
 
-import com.soywiz.korio.util.Props
 import io.gitlab.edrd.xmousegrabber.exception.BadInputException
 import io.gitlab.edrd.xmousegrabber.io.File
+import io.gitlab.edrd.xmousegrabber.properties.Properties
 
 data class Configuration(val buttons: List<Button>) {
 	data class Button(val number: Int, val command: String)
 
 	companion object {
 		fun loadFromFile(file: File): Configuration {
-			val properties = file.readText().let(Props::load)
+			val properties = file.readText().let(Properties::parse)
 
 			val buttons = properties.map { (key, value) ->
 				val (buttonNumber) = configPattern.find(key)?.destructured
