@@ -7,13 +7,14 @@ import platform.posix.*
 public class File(public val path: String) {
 	public fun readText(): String = buildString {
 		val pointer = openOrThrow()
-		while (true) {
+
+		generateSequence {
 			// Probably not that efficient, but config files are small so it's ok
-			when (val char = fgetc(pointer)) {
-				EOF -> break
-				else -> append(char.toChar())
-			}
+			fgetc(pointer).takeIf { it != EOF }
+		}.forEach {
+			append(it.toChar())
 		}
+
 		fclose(pointer)
 	}
 
@@ -30,7 +31,6 @@ public class File(public val path: String) {
 		public fun forRelativeOrAbsolutePath(path: String): File = File(
 			path = if (path.startsWith("/")) path else "$baseDir/$path"
 		)
-
 		private val baseDir = get_current_dir_name()?.toKStringFromUtf8()
 	}
 }
