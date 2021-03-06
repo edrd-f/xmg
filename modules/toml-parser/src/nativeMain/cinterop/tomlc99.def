@@ -1,0 +1,3 @@
+# Static library linking options can be found in this modules' Gradle config
+headers = toml.h toml.c
+package = internal.cinterop.tomlc99
