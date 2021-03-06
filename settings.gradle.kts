@@ -2,7 +2,7 @@ rootProject.name = "x-mouse-grabber"
 
 val modulesDir = file("modules")
 
-requireNotNull(modulesDir.listFiles()) { "Unable to list files under ./modules directory" }
+requireNotNull(modulesDir.listFiles()) { "Unable to list files under ./$modulesDir directory" }
 	.asSequence()
 	.filter(File::isDirectory)
 	.map(File::getName)
