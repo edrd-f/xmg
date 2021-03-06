@@ -3,10 +3,10 @@ package io.gitlab.edrd.xmousegrabber.xcb
 import io.gitlab.edrd.xmousegrabber.xcb.internal.Connection
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.yield
 
-public class Xcb {
+public class Xcb(private val pollIntervalMillis: Long = 5) {
 	public sealed class Event {
 		public class ButtonPress(public val buttonNumber: Int) : Event()
 	}
@@ -25,7 +25,7 @@ public class Xcb {
 
 	private fun startEventPollingLoop() = GlobalScope.launch {
 		while (true) {
-			yield()
+			delay(pollIntervalMillis)
 			connection.pollForEvent()?.let { eventChannel.send(it) } ?: continue
 		}
 	}
