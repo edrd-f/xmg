@@ -24,11 +24,16 @@ kotlin {
 }
 
 tasks.create("buildTomlC99") {
+	inputs.files(tomlc99Dir.listFiles { _, file ->
+		file.endsWith(".c") || file.endsWith(".h")
+	})
+
+	outputs.file(tomlc99Dir.resolve("libtoml.a"))
+
 	doLast {
 		exec {
 			workingDir = file(tomlc99Dir)
-			args("libtoml.a")
-			commandLine("make")
+			commandLine("make", "libtoml.a")
 		}
 	}
 }
