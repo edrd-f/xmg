@@ -5,7 +5,7 @@ kotlin {
 		}
 	}
 
-	sourceSets.getByName("commonMain") {
+	sourceSets.getByName("nativeMain") {
 		dependencies {
 			implementation(project(":xcb"))
 			implementation(project(":io"))

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
-
 kotlin {
 	nativeTarget.compilations["main"].cinterops {
 		create("glibc") {
@@ -7,5 +5,5 @@ kotlin {
 			includeDirs("/usr/include")
 		}
 	}
-	explicitApi = ExplicitApiMode.Strict
+	strictExplicitApi()
 }

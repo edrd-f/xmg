@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
-
 kotlin {
   nativeTarget.compilations["main"].cinterops {
 		create("xcb") {
@@ -8,11 +6,11 @@ kotlin {
 		}
 	}
 
-	sourceSets.getByName("commonMain") {
+	sourceSets.getByName("nativeMain") {
 		dependencies {
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 		}
 	}
 
-	explicitApi = ExplicitApiMode.Strict
+	strictExplicitApi()
 }

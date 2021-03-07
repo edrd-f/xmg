@@ -1,11 +1,9 @@
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
-
 val tomlc99Dir = file("$projectDir/src/nativeMain/c/tomlc99")
 
 kotlin {
-	sourceSets.getByName("commonMain") {
+	sourceSets.getByName("nativeMain") {
 		dependencies {
-			implementation(project(":io"))
+			implementation(project(":common"))
 		}
 	}
 
@@ -20,7 +18,7 @@ kotlin {
 		linkerOpts("-L${tomlc99Dir.absolutePath}", "-l:libtoml.a")
 	}
 
-	explicitApi = ExplicitApiMode.Strict
+	strictExplicitApi()
 }
 
 tasks.create("buildTomlC99") {
