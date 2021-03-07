@@ -23,4 +23,20 @@ public class TomlArray internal constructor(
 	override fun getTable(key: Int): TomlTable? {
 		return toml_table_at(reference, key)?.let(::TomlChildTable)
 	}
+
+	public fun iterator(): Iterator<PolymorphicValueAccessor> = object : Iterator<PolymorphicValueAccessor> {
+		var currentIndex = 0
+		val size = toml_array_nelem(reference)
+
+		override fun hasNext(): Boolean = currentIndex < size
+
+		override fun next(): PolymorphicValueAccessor = PolymorphicValueAccessor(currentIndex++)
+	}
+
+	public inner class PolymorphicValueAccessor internal constructor(private val index: Int) {
+		public fun getString(): String? = getString(index)
+		public fun getLong(): Long? = getLong(index)
+		public fun getArray(): TomlArray? = getArray(index)
+		public fun getTable(): TomlTable? = getTable(index)
+	}
 }

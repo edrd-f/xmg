@@ -1,3 +1,9 @@
 .gradle
 .idea
 build/
+
+/config.toml
+
+# TODO: remove after fully migrating to TOML
+/config.properties
+/config.props
