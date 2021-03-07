@@ -1,11 +1,11 @@
 package io.gitlab.edrd.xmousegrabber.internal
 
+import io.gitlab.edrd.xmousegrabber.common.rightOrThrow
 import io.gitlab.edrd.xmousegrabber.exception.BadInputException
 import io.gitlab.edrd.xmousegrabber.io.File
 import io.gitlab.edrd.xmousegrabber.io.extension
 import io.gitlab.edrd.xmousegrabber.properties.Properties
 import io.gitlab.edrd.xmousegrabber.toml.TomlParser
-import io.gitlab.edrd.xmousegrabber.toml.rightOrThrow
 
 data class Configuration(val buttons: List<Button>) {
 	data class Button(val number: Int, val command: String)

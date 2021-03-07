@@ -2,6 +2,7 @@ package io.gitlab.edrd.xmousegrabber.toml
 
 import internal.cinterop.tomlc99.toml_parse
 import internal.cinterop.tomlc99.toml_table_t
+import io.gitlab.edrd.xmousegrabber.common.Either
 import kotlinx.cinterop.*
 
 public class TomlParser {
