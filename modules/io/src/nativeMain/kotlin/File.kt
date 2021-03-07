@@ -4,7 +4,9 @@ import internal.cinterop.glibc.get_current_dir_name
 import kotlinx.cinterop.toKStringFromUtf8
 import platform.posix.*
 
-public class File(public val path: String) {
+public interface File {
+	public val path: String
+
 	public fun readText(): String = buildString {
 		val pointer = openOrThrow()
 
@@ -28,9 +30,14 @@ public class File(public val path: String) {
 	}
 
 	public companion object {
+		public operator fun invoke(path: String): File = object : File {
+			override val path = path
+		}
+
 		public fun forRelativeOrAbsolutePath(path: String): File = File(
 			path = if (path.startsWith("/")) path else "$baseDir/$path"
 		)
+
 		private val baseDir = get_current_dir_name()?.toKStringFromUtf8()
 	}
 }
