@@ -1,4 +1,5 @@
 import io.gitlab.edrd.xmousegrabber.toml.TomlParser
+import util.successResultOrFail
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull

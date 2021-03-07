@@ -27,7 +27,7 @@ it's possible to install it through the package manager.
 5. (optional) Create an autostart configuration. For KDE environments, this
 can be a simple script in `~/.config/autostart-scripts`.
 
-## Configuration
+## Configuration (TODO: update)
 
 The configuration file must use the properties* format
 (`key = value`), where `key` should be `button.{number}.command = {command}`.

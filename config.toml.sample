@@ -1,3 +1,5 @@
+version = 1
+
 [[mappings]]
   button = 8
   command = '''

@@ -1,5 +1,6 @@
 package io.gitlab.edrd.xmousegrabber.internal
 
+// TODO: move to common
 class Logger(@PublishedApi internal val level: Level) {
 	enum class Level {
 		Debug,

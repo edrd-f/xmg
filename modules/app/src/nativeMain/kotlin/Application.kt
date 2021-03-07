@@ -1,14 +1,13 @@
 package io.gitlab.edrd.xmousegrabber
 
-import io.gitlab.edrd.xmousegrabber.internal.Configuration
+import io.gitlab.edrd.xmousegrabber.config.Configuration
 import io.gitlab.edrd.xmousegrabber.internal.Logger
 import io.gitlab.edrd.xmousegrabber.io.Environment
-import io.gitlab.edrd.xmousegrabber.io.File
 import io.gitlab.edrd.xmousegrabber.xcb.Xcb
 import kotlinx.coroutines.runBlocking
 import platform.posix.system
 
-class Application(private val configFile: File) {
+class Application(private val configuration: Configuration) {
 	fun run() = runBlocking {
 		configuration.buttons.forEach { xcb.grabButton(it.number) }
 
@@ -31,10 +30,6 @@ class Application(private val configFile: File) {
 	}
 
 	private val xcb = Xcb()
-
-	private val configuration = runBlocking {
-		Configuration.loadFromFile(configFile)
-	}
 
 	private val commands = configuration.buttons.associate { it.number to it.command }
 
