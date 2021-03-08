@@ -20,13 +20,37 @@ public sealed class Either<out A, out B> {
 		override val left: Nothing get() = error("Attempting to get Right value of Either.Left")
 		override val right: B get() = value
 	}
+
+	public companion object
 }
 
-public fun <T> T.left(): Either<T, Nothing> = Either.Left(this)
+public inline fun <T> T.left(): Either<T, Nothing> = Either.Left(this)
 
-public fun <T> T.right(): Either<Nothing, T> = Either.Right(this)
+public inline fun <T> T.right(): Either<Nothing, T> = Either.Right(this)
+
+public inline fun <A, B : Any> B?.rightIfNotNull(left: () -> A): Either<A, B> = when (this) {
+	null -> left.invoke().left()
+	else -> this.right()
+}
 
 public inline fun <A, B> Either<A, B>.rightOr(block: (A) -> Nothing): B {
 	if (isLeft) block(left)
 	return right
 }
+
+public inline fun <A, B, C> Either<A, B>.map(transform: (B) -> C): Either<A, C> = when (this) {
+	is Either.Left -> value.left()
+	is Either.Right -> transform(value).right()
+}
+
+public inline fun <A, B, C> Either<A, B>.mapLeft(transform: (A) -> C): Either<C, B> = when (this) {
+	is Either.Left -> transform(value).left()
+	is Either.Right -> value.right()
+}
+
+public inline fun <A, B, C> Either<A, B>.flatMap(transform: (B) -> Either<A, C>): Either<A, C> = when (this) {
+	is Either.Left -> value.left()
+	is Either.Right -> transform(value)
+}
+
+public inline operator fun <A, B> Either<A, List<B>>.plus(other: B): Either<A, List<B>> = map { it + other }

@@ -1,6 +1,5 @@
 package io.gitlab.edrd.xmousegrabber.toml
 
-// TODO: make sealed
 public interface TomlValueContainer<K> {
 	public fun getLong(key: K): Long?
 

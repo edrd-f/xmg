@@ -7,9 +7,9 @@ kotlin {
 
 	sourceSets.getByName("nativeMain") {
 		dependencies {
-			implementation(project(":xcb"))
-			implementation(project(":io"))
 			implementation(project(":config"))
+			implementation(project(":io"))
+			implementation(project(":xcb"))
 			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 		}
 	}

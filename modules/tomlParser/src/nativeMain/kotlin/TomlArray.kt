@@ -33,7 +33,7 @@ public class TomlArray internal constructor(
 		override fun next(): PolymorphicValueAccessor = PolymorphicValueAccessor(currentIndex++)
 	}
 
-	public inner class PolymorphicValueAccessor internal constructor(private val index: Int) {
+	public inner class PolymorphicValueAccessor internal constructor(public val index: Int) {
 		public fun getString(): String? = getString(index)
 		public fun getLong(): Long? = getLong(index)
 		public fun getArray(): TomlArray? = getArray(index)
