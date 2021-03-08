@@ -19,6 +19,7 @@ internal object ConfigurationLoader
 			.rightIfNotNull(left = { MissingOrInvalidVersion })
 			.flatMap(::getConfigurationLoaderForVersion)
 			.flatMap { loader -> loader.load(rootTable) }
+			.also { rootTable.free() }
 	}
 
 	private fun getConfigurationLoaderForVersion(version: Long) = when (version) {
