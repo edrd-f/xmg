@@ -1,3 +1,5 @@
+val kotlinCoroutinesVersion: String by project
+
 kotlin {
 	nativeTarget.apply {
 		binaries.executable {
@@ -10,7 +12,7 @@ kotlin {
 			implementation(project(":config"))
 			implementation(project(":io"))
 			implementation(project(":xcb"))
-			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion")
 		}
 	}
 }

@@ -1,3 +1,5 @@
+val kotlinCoroutinesVersion: String by project
+
 kotlin {
   nativeTarget.compilations["main"].cinterops {
 		create("xcb") {
@@ -8,7 +10,7 @@ kotlin {
 
 	sourceSets.getByName("nativeMain") {
 		dependencies {
-			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+			implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion")
 		}
 	}
 

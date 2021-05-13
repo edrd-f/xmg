@@ -7,8 +7,8 @@ repositories {
 }
 
 dependencies {
-	// TODO: move version to pluginManagement (settings.gradle.kts)
-	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30")
+	// TODO: find a way to extract the version out of here
+	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0")
 }
 
 kotlinDslPluginOptions {
