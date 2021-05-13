@@ -1,5 +1,5 @@
 plugins {
-	id("com.bnorm.power.kotlin-power-assert") version "0.7.0"
+	id("com.bnorm.power.kotlin-power-assert") version "0.8.1"
 }
 
 kotlin {
