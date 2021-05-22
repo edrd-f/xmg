@@ -1,4 +1,4 @@
-package io.gitlab.edrd.xmousegrabber.config.internal
+package io.gitlab.edrd.xmousegrabber.config.internal.v1
 
 import io.gitlab.edrd.xmousegrabber.common.*
 import io.gitlab.edrd.xmousegrabber.config.Configuration
@@ -17,6 +17,7 @@ internal class V1ConfigurationLoader
 			.rightIfNotNull(left = { MissingOrInvalidMappingsType })
 			.flatMap(::getButtonsFromMappings)
 			.map { buttons -> Configuration(version = 1.0, buttons) }
+			.flatMap(::validate)
 	}
 
 	private fun getButtonsFromMappings(mappings: TomlArray) = mappings

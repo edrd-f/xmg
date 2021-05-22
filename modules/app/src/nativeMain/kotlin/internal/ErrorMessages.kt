@@ -21,5 +21,8 @@ fun messageForConfigurationError(error: InvalidConfiguration): String = when (er
 	is InvalidConfiguration.UnsupportedVersion ->
 		"version ${error.value} is not supported"
 
+	is InvalidConfiguration.DuplicateButtonNumber ->
+		"found duplicate button ${error.number} configuration"
+
 	is InvalidConfiguration.ParseError -> error.message
 }

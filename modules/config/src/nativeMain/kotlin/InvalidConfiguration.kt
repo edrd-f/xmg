@@ -12,6 +12,8 @@ public sealed class InvalidConfiguration {
 		public val expected: String
 	) : InvalidConfiguration()
 
+	public data class DuplicateButtonNumber(public val number: Int) : InvalidConfiguration()
+
 	public data class MissingOrInvalidButtonNumberType(public val location: String) : InvalidConfiguration()
 
 	public data class MissingOrInvalidCommandType(public val location: String) : InvalidConfiguration()

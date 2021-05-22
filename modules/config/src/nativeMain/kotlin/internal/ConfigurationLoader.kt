@@ -3,6 +3,7 @@ package io.gitlab.edrd.xmousegrabber.config.internal
 import io.gitlab.edrd.xmousegrabber.common.*
 import io.gitlab.edrd.xmousegrabber.config.ConfigurationEither
 import io.gitlab.edrd.xmousegrabber.config.InvalidConfiguration.*
+import io.gitlab.edrd.xmousegrabber.config.internal.v1.V1ConfigurationLoader
 import io.gitlab.edrd.xmousegrabber.toml.TomlParser
 import io.gitlab.edrd.xmousegrabber.toml.TomlRootTable
 

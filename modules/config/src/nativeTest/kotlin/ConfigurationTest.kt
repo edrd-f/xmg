@@ -116,6 +116,22 @@ class ConfigurationTest {
 		assert(result.right == expectedConfiguration)
 	}
 
-	// TODO
-	// @Test fun duplicateButtonNumber()
+	 @Test fun duplicateButtonNumber() {
+	 	 val result = Configuration.loadFromToml("""
+		    version = 1
+		 	  [[mappings]]
+			    button = 8
+				  command = ''
+				[[mappings]]
+				  button = 8
+					command = ''
+	   """.trimIndent())
+
+		 assert(result.isLeft)
+
+		 result.left.let { left ->
+			 assertInstanceOf<InvalidConfiguration.DuplicateButtonNumber>(left)
+			 assert(left.number == 8)
+		 }
+	 }
 }
