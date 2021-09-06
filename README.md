@@ -21,7 +21,7 @@ it's possible to install it through the package manager.
 	 configuration file. For example:
 
     ```sh
-    xmg ~/.config/xmg.properties
+    xmg ~/.config/xmg.toml
     ```
 
 5. (optional) Create an autostart configuration. For KDE environments, this
@@ -29,30 +29,44 @@ can be a simple script in `~/.config/autostart-scripts`.
 
 ## Configuration
 
-The configuration file must use the properties* format
-(`key = value`), where `key` should be `button.{number}.command = {command}`.
-For example:
+Configuration files are written in [TOML](https://toml.io/en/) format. The following example describes all supported options:
 
-```properties
-# Shell commands are ok
-button.8.command = echo Hello
+```toml
+version = 1
 
-# Spotify Play/Pause through D-Bus
-button.9.command = dbus-send --type=method_call \
-	--dest=org.mpris.MediaPlayer2.spotify \
-	/org/mpris/MediaPlayer2 \
-	org.mpris.MediaPlayer2.Player.PlayPause
+[[mappings]]
+  button = 8
+  command = '''
+    qdbus org.kde.kglobalaccel
+      /component/kwin invokeShortcut "ExposeAll"
+  '''
+
+[[mappings]]
+  button = 9
+  command = '''
+    dbus-send
+      --type=method_call
+      --dest=org.mpris.MediaPlayer2.spotify
+      /org/mpris/MediaPlayer2
+      org.mpris.MediaPlayer2.Player.PlayPause
+  '''
 ```
 
-\* _Only a subset of the properties format is supported._
-
-You can find out what are the button numbers by using `xinput`, from `xorg-xinput` package:
+You can find out the button numbers by using `xinput`, from `xorg-xinput` package:
 
 ```sh
 xinput test-xi2 --root | grep -A 10 ButtonPress
 ```
 
 The number after `detail` is the button number.
+
+## Debugging
+
+You can check XMG is receiving mouse events correctly by looking at debug logs. To activate them, set the `LogLevel` environment variable to `debug`:
+
+```sh
+LogLevel=debug xmg config.toml
+```
 
 ## Future ideas
 
