@@ -7,12 +7,6 @@ kotlin {
 		}
 	}
 
-	sourceSets.getByName("nativeTest") {
-		dependencies {
-			implementation(project(":testUtil"))
-		}
-	}
-
 	nativeTarget.compilations["main"].cinterops {
 		create("tomlc99") {
 			defFile("src/nativeMain/cinterop/tomlc99.def")

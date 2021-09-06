@@ -1,8 +1,8 @@
 import io.gitlab.edrd.xmousegrabber.config.Configuration
 import io.gitlab.edrd.xmousegrabber.config.InvalidConfiguration
-import io.gitlab.edrd.xmousegrabber.testUtil.assertInstanceOf
 import kotlin.contracts.ExperimentalContracts
 import kotlin.test.Test
+import kotlin.test.assertIs
 
 @ExperimentalContracts
 class ConfigurationTest {
@@ -12,7 +12,7 @@ class ConfigurationTest {
 		assert(result.isLeft)
 
 		result.left.let { left ->
-			assertInstanceOf<InvalidConfiguration.ParseError>(left)
+			assertIs<InvalidConfiguration.ParseError>(left)
 			assert(left.message == "line 1: missing =")
 		}
 	}
@@ -21,7 +21,7 @@ class ConfigurationTest {
 		val result = Configuration.loadFromToml("")
 
 		assert(result.isLeft)
-		assertInstanceOf<InvalidConfiguration.MissingOrInvalidVersion>(result.left)
+		assertIs<InvalidConfiguration.MissingOrInvalidVersion>(result.left)
 	}
 
 	@Test fun unsupportedVersion() {
@@ -29,7 +29,7 @@ class ConfigurationTest {
 
 		assert(result.isLeft)
 		result.left.let { left ->
-			assertInstanceOf<InvalidConfiguration.UnsupportedVersion>(left)
+			assertIs<InvalidConfiguration.UnsupportedVersion>(left)
 			assert(left.value == 35L)
 		}
 	}
@@ -38,7 +38,7 @@ class ConfigurationTest {
 		val result = Configuration.loadFromToml("version = 1")
 
 		assert(result.isLeft)
-		assertInstanceOf<InvalidConfiguration.MissingOrInvalidMappingsType>(result.left)
+		assertIs<InvalidConfiguration.MissingOrInvalidMappingsType>(result.left)
 	}
 
 	@Test fun missingButtonNumber() {
@@ -51,7 +51,7 @@ class ConfigurationTest {
 		assert(result.isLeft)
 
 		result.left.let { left ->
-			assertInstanceOf<InvalidConfiguration.MissingOrInvalidButtonNumberType>(left)
+			assertIs<InvalidConfiguration.MissingOrInvalidButtonNumberType>(left)
 			assert(left.location == "mappings[0]")
 		}
 	}
@@ -63,7 +63,7 @@ class ConfigurationTest {
 		""".trimIndent())
 
 		assert(result.isLeft)
-		assertInstanceOf<InvalidConfiguration.MissingOrInvalidMappingsType>(result.left)
+		assertIs<InvalidConfiguration.MissingOrInvalidMappingsType>(result.left)
 	}
 
 	@Test fun unexpectedType() {
@@ -75,7 +75,7 @@ class ConfigurationTest {
 		assert(result.isLeft)
 
 		result.left.let { left ->
-			assertInstanceOf<InvalidConfiguration.UnexpectedType>(left)
+			assertIs<InvalidConfiguration.UnexpectedType>(left)
 			assert(left.location == "mappings[0]")
 			assert(left.expected == "table")
 		}
@@ -130,7 +130,7 @@ class ConfigurationTest {
 		 assert(result.isLeft)
 
 		 result.left.let { left ->
-			 assertInstanceOf<InvalidConfiguration.DuplicateButtonNumber>(left)
+			 assertIs<InvalidConfiguration.DuplicateButtonNumber>(left)
 			 assert(left.number == 8)
 		 }
 	 }
