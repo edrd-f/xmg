@@ -19,16 +19,16 @@ fun main(args: Array<String>) {
 	Application(configuration = loadConfiguration(configFile)).run()
 }
 
-fun checkFileExists(file: File) {
+private fun checkFileExists(file: File) {
 	if (!file.exists()) fail("File ${file.path} does not exist.")
 }
 
-fun loadConfiguration(configFile: File): Configuration {
+private fun loadConfiguration(configFile: File): Configuration {
 	return Configuration
 		.loadFromToml(configFile.readText())
 		.rightOr(::failWithConfigurationError)
 }
 
-fun failWithConfigurationError(error: InvalidConfiguration): Nothing {
+private fun failWithConfigurationError(error: InvalidConfiguration): Nothing {
 	fail("Invalid configuration: ${messageForConfigurationError(error)}.")
 }

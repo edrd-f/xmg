@@ -1,7 +1,7 @@
 package io.gitlab.edrd.xmousegrabber
 
+import io.gitlab.edrd.xmousegrabber.common.Logger
 import io.gitlab.edrd.xmousegrabber.config.Configuration
-import io.gitlab.edrd.xmousegrabber.internal.Logger
 import io.gitlab.edrd.xmousegrabber.io.Environment
 import io.gitlab.edrd.xmousegrabber.xcb.Xcb
 import kotlinx.coroutines.runBlocking
@@ -34,6 +34,6 @@ class Application(private val configuration: Configuration) {
 	private val commands = configuration.buttons.associate { it.number to it.command }
 
 	private val logger = Logger(
-		level = Environment["LogLevel"]?.let { Logger.Level.forValue(it) } ?: Logger.Level.Info
+		level = Environment["LogLevel"]?.let(Logger.Level::forValue) ?: Logger.Level.Info
 	)
 }
